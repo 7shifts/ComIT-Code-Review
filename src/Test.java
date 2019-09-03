@@ -9,6 +9,7 @@ public class Test {
         String mixedcase = "MiXeDcAsE";
         String numpass = "123456789";
         String Qualitypass = "ThuV89kB";
+        String goodbutshort = "ThuV8";
 
 
         //yo never written tests before here goes//
@@ -72,7 +73,12 @@ public class Test {
             System.out.println("Number check is working");
         }
         try{
-            passwordverifer.Verify(nineCharLowercase);
+            passwordverifer.Verify(Qualitypass);
+        }catch (Exception e){
+            System.out.println("password not strong enough");
+        }
+        try{
+            passwordverifer.Verify(goodbutshort);
         }catch (Exception e){
             System.out.println("password not strong enough");
         }

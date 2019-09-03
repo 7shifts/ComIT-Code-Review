@@ -1,13 +1,13 @@
 public class PasswordVerifier {
     public void Verify(String password) throws Exception {
-        try{
+        try {
             passwordminLength(password);
             passwordnotnull(password);
             passwordhasUppercase(password);
-//            passwordhasLowercase(password);
-//            passwordHasNumber(password);
-        }catch (Exception e){
-            System.out.println(e + "caused issues");
+            passwordhasLowercase(password);
+            passwordHasNumber(password);
+        } catch (Exception e) {
+            System.out.println(e + " caused issues!");
         }
     }
 
@@ -38,7 +38,8 @@ public class PasswordVerifier {
             }
         }
     }
-    public void passwordhasLowercase(String password) throws Exception{
+
+    public void passwordhasLowercase(String password) throws Exception {
         Boolean hasLowercase = false;
         for (int i = 0; i <= password.length(); i++) {
             Character currentCharacter = password.charAt(i);
@@ -52,7 +53,7 @@ public class PasswordVerifier {
         }
     }
 
-    public void passwordHasNumber(String password) throws Exception{
+    public void passwordHasNumber(String password) throws Exception {
         Boolean hasNumber = false;
         for (int i = 0; i <= password.length(); i++) {
             Character currentCharacter = password.charAt(i);
