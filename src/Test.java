@@ -8,15 +8,17 @@ public class Test {
         String lowercase = "alllowercase";
         String mixedcase = "MiXeDcAsE";
         String numpass = "123456789";
-        String Qualitypass = "ThuV89kB";
+        String Qualitypass = "ThuV89kBN";
         String goodbutshort = "ThuV8";
+        String threegoodqualities = "longer789";
 
 
-        //yo never written tests before here goes//
+//        yo never written tests before here goes//
 
 //pasword length
         try {
             passwordverifer.passwordminLength(tooshort);
+            passwordverifer.passwordminLength(threegoodqualities);
             passwordverifer.passwordminLength(blank);
         } catch (Exception e) {
             System.out.println("password legnth exceptions = working");
@@ -72,16 +74,36 @@ public class Test {
         } catch (Exception e) {
             System.out.println("Number check is working");
         }
-        try{
-            passwordverifer.Verify(Qualitypass);
-        }catch (Exception e){
+        try {
+            if (passwordverifer.Verify(Qualitypass)) {
+                System.out.println("Quality pass passes");
+            }
+        } catch (Exception e) {
             System.out.println("password not strong enough");
         }
-        try{
+        try {
+            if (passwordverifer.Verify(threegoodqualities)) {
+                System.out.println("3 strength pass passes");
+            }
+        } catch (Exception e) {
+            System.out.println("password not strong enough");
+        }
+        try {
             passwordverifer.Verify(goodbutshort);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("password not strong enough");
         }
+        try {
+            passwordverifer.Verify(tooshort);
+        } catch (Exception e) {
+            System.out.println("password not strong enough");
+        }
+        try {
+            passwordverifer.Verify(uppercase);
+        } catch (Exception e) {
+            System.out.println(e + "casued issues");
+        }
+
     }
 
 }
