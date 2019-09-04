@@ -31,7 +31,7 @@ public class PasswordVerifier {
             System.out.println(e);
         }
 
-        if (numValid == 3) return true; // for optimization
+        if (numValid >= 3) return true; // for optimization
 
         try {
             if (containsUppercase(password)) numValid ++;
@@ -39,7 +39,7 @@ public class PasswordVerifier {
             System.out.println(e);
         }
 
-        if (numValid == 3) return true; // for optimization
+        if (numValid >= 3) return true; // for optimization
 
         try {
             if (containsDigit(password)) numValid ++;
@@ -47,7 +47,7 @@ public class PasswordVerifier {
             System.out.println(e);
         }
 
-        return numValid == 3;
+        return numValid >= 3;
 
         /*
             Optimization:
