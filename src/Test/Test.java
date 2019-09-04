@@ -1,3 +1,8 @@
+package Test;
+
+
+import Main.PasswordVerifier;
+
 public class Test {
     public static void main(String[] args) {
         PasswordVerifier passwordverifer = new PasswordVerifier();
@@ -11,15 +16,14 @@ public class Test {
         String Qualitypass = "ThuV89kBN";
         String goodbutshort = "ThuV8";
         String threegoodqualities = "longer789";
+        String qualityuppercase = "THUV89KBN";
 
+//        yo not too familiar in writing good tests but here goes
 
-//        yo never written tests before here goes//
-
-//pasword length
+//pasword length testing
         try {
             passwordverifer.passwordminLength(tooshort);
-            passwordverifer.passwordminLength(threegoodqualities);
-            passwordverifer.passwordminLength(blank);
+
         } catch (Exception e) {
             System.out.println("password legnth exceptions = working");
         }
@@ -28,7 +32,9 @@ public class Test {
         } catch (Exception e) {
             System.out.println("Password length has errors");
         }
-        // pasword not null
+
+
+        // pasword not null testing¬
         try {
             passwordverifer.passwordnotnull(null);
         } catch (Exception e) {
@@ -36,22 +42,23 @@ public class Test {
         }
 
         try {
-            passwordverifer.passwordnotnull(tooshort);
+            passwordverifer.passwordnotnull(blank);
         } catch (Exception e) {
-            System.out.println("password null doesn't work ");
+            System.out.println("password blank check works ");
         }
-//has uppercase
+
+//has uppercase testing
         try {
             passwordverifer.passwordhasUppercase(uppercase);
         } catch (Exception e) {
             System.out.println("not detecting uppercase ");
         }
         try {
-            passwordverifer.passwordhasUppercase(tooshort);
+            passwordverifer.passwordhasUppercase(lowercase);
         } catch (Exception e) {
             System.out.println("Uppercase check works");
         }
-//has lowercase
+//has lowercase testing
         try {
             passwordverifer.passwordhasLowercase(nineCharLowercase);
         } catch (Exception e) {
@@ -62,8 +69,7 @@ public class Test {
         } catch (Exception e) {
             System.out.println("Lowercase check works");
         }
-//has digit
-
+//has digit testing
         try {
             passwordverifer.passwordHasNumber(numpass);
         } catch (Exception e) {
@@ -74,6 +80,7 @@ public class Test {
         } catch (Exception e) {
             System.out.println("Number check is working");
         }
+        //Verify testing
         try {
             if (passwordverifer.Verify(Qualitypass)) {
                 System.out.println("Quality pass passes");
@@ -89,23 +96,27 @@ public class Test {
             System.out.println("password not strong enough");
         }
         try {
-            passwordverifer.Verify(goodbutshort);
+            if (passwordverifer.Verify(goodbutshort)) ;
+            System.out.println("good short password passes");
         } catch (Exception e) {
             System.out.println("password not strong enough");
         }
         try {
-            passwordverifer.Verify(tooshort);
+            if (passwordverifer.Verify(qualityuppercase) == false) ;
+            System.out.println("no lowercase will always fail");
         } catch (Exception e) {
             System.out.println("password not strong enough");
         }
-        try {
-            passwordverifer.Verify(uppercase);
-        } catch (Exception e) {
-            System.out.println(e + "casued issues");
+        try{
+            if(passwordverifer.Verify(uppercase)){
+                System.out.println("verify isn't working");
+            }
+        }catch (Exception e) {
+            System.out.println( e + " verify check is working");
         }
 
     }
-
 }
 
-
+//If each check took 1 second could make the not null check faster by only checking for null and allowing blank to be caught by length/lowercase/uppercase checks.
+//for the uppercase check I could get

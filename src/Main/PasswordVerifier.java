@@ -1,14 +1,18 @@
+package Main;
+
 public class PasswordVerifier {
 
 
     public boolean Verify(String password) throws Exception {
         boolean validpass = false;
+        boolean  haslowercase = false;
         int passwordstrength = 0;
         try {
             if (passwordnotnull(password)) {
                 passwordstrength = passwordstrength + 1;
             }
             if (passwordhasLowercase(password)) {
+                haslowercase = true;
                 passwordstrength = passwordstrength + 1;
             }
             if (passwordHasNumber(password)) {
@@ -20,13 +24,11 @@ public class PasswordVerifier {
             if (passwordhasUppercase(password)) {
                 passwordstrength = passwordstrength + 1;
             }
-            if (passwordhasLowercase(password) == false) {
-                passwordstrength = 0;
-            }
+
         } catch (Exception e) {
-            System.out.println(e + " caused issues!");
+            throw new Exception( e + "verify has failed");
         }
-        if (passwordstrength >= 3) {
+        if (passwordstrength >= 3 & validpass) {
             validpass = true;
         }
         return validpass;
@@ -42,7 +44,7 @@ public class PasswordVerifier {
 
 
     public Boolean passwordnotnull(String password) throws Exception {
-        if (password == null) {
+        if (password == null || password.isBlank()) {
             throw new Exception("password cannot be null");
         } else
             return true;
