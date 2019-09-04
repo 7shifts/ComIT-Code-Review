@@ -8,9 +8,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PasswordVerifierTest {
     private PasswordVerifier tester = new PasswordVerifier();
+
     @Test
     void verify() {
-
+        assertEquals(true, tester.verify("7ShiftComIT"));   // not null, upper, lower, digit, >8
+        assertEquals(true, tester.verify("7Shift"));        // not null, upper, lower, digit
+        assertEquals(true, tester.verify("Shift"));         // not null, upper, lower
+        assertEquals(false, tester.verify("SHIFT"));        // not null, upper
+        assertEquals(false, tester.verify(null));
     }
 
     @Test
@@ -25,6 +30,7 @@ class PasswordVerifierTest {
                 () -> {
                     tester.isLargerThanEight("abc");
                     tester.isLargerThanEight("abcd5678");
+                    tester.isLargerThanEight(null);
                 });
     }
 
@@ -57,6 +63,7 @@ class PasswordVerifierTest {
                     tester.containsUppercase("7shift");
                     tester.containsUppercase("7777777");
                     tester.containsUppercase("");
+                    tester.isLargerThanEight(null);
                 });
     }
 
@@ -74,6 +81,7 @@ class PasswordVerifierTest {
                     tester.containsLowercase("7SHIFT");
                     tester.containsLowercase("7777777");
                     tester.containsLowercase("");
+                    tester.isLargerThanEight(null);
                 });
     }
 
@@ -91,6 +99,7 @@ class PasswordVerifierTest {
                 () -> {
                     tester.containsDigit("SevenShift");
                     tester.containsDigit("");
+                    tester.isLargerThanEight(null);
                 });
 
     }

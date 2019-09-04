@@ -9,14 +9,45 @@ public class PasswordVerifier {
     }
 
     public boolean verify(String password) {
-        return false;
+        int numValid = 0;
+        try {
+            if (isLargerThanEight(password)) numValid++;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+
+        try {
+            if (isNotNull(password)) numValid++;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+
+        try {
+            if (containsUppercase(password)) numValid ++;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+
+        try {
+            if (containsLowercase(password)) numValid++;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+
+        try {
+            if (containsDigit(password)) numValid ++;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+
+        return numValid >=3;
     }
 
     public boolean isLargerThanEight(String password) throws IllegalArgumentException {
-        Boolean isValidPassword = password.length() > 8;
+        Boolean isValidPassword = (password != null) && (password.length() > 8);
 
         if (!isValidPassword)
-            throw new IllegalArgumentException("Error: Password length has to be greater than 8.");
+            throw new IllegalArgumentException("Password length has to be greater than 8.");
 
         return true;
     }
@@ -25,37 +56,37 @@ public class PasswordVerifier {
         Boolean isValidPassword = (password != null);
 
         if (!isValidPassword)
-            throw new IllegalArgumentException("Error: Password cannot be blank.");
+            throw new IllegalArgumentException("Password cannot be blank.");
 
         return true;
     }
 
     public boolean containsUppercase(String password) throws IllegalArgumentException {
         Pattern uppercasePattern = Pattern.compile("^(?=.*[A-Z]).+$");
-        Boolean isValidPassword = uppercasePattern.matcher(password).matches();
+        Boolean isValidPassword = (password != null) && uppercasePattern.matcher(password).matches();
 
         if (!isValidPassword)
-            throw new IllegalArgumentException("Error: Password should have at least one uppercase letter.");
+            throw new IllegalArgumentException("Password should have at least one uppercase letter.");
 
         return true;
     }
 
     public boolean containsLowercase(String password) throws IllegalArgumentException {
         Pattern lowercasePattern = Pattern.compile("^(?=.*[a-z]).+$");
-        Boolean isValidPassword = lowercasePattern.matcher(password).matches();
+        Boolean isValidPassword = (password != null) && lowercasePattern.matcher(password).matches();
 
         if (!isValidPassword)
-            throw new IllegalArgumentException("Error: Password should have at least one lowercase letter.");
+            throw new IllegalArgumentException("Password should have at least one lowercase letter.");
 
         return true;
     }
 
     public boolean containsDigit(String password) throws IllegalArgumentException {
         Pattern digitPattern = Pattern.compile("^(?=.*\\d).+$");
-        Boolean isValidPassword = digitPattern.matcher(password).matches();
+        Boolean isValidPassword = (password != null) && digitPattern.matcher(password).matches();
 
         if (!isValidPassword)
-            throw new IllegalArgumentException("Error: Password should contain at least one number.");
+            throw new IllegalArgumentException("Password should contain at least one number.");
 
         return true;
     }
