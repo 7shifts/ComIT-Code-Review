@@ -20,16 +20,18 @@ public class PasswordVerifier {
         }
 
         try {
-            if (isLargerThanEight(password)) numValid++;
+            if (isNotNull(password)) numValid++;
         } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
 
         try {
-            if (isNotNull(password)) numValid++;
+            if (isLargerThanEight(password)) numValid++;
         } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
+
+        if (numValid == 3) return true; // for optimization
 
         try {
             if (containsUppercase(password)) numValid ++;
@@ -37,13 +39,25 @@ public class PasswordVerifier {
             System.out.println(e);
         }
 
+        if (numValid == 3) return true; // for optimization
+
         try {
             if (containsDigit(password)) numValid ++;
         } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
 
-        return numValid >=3;
+        return numValid == 3;
+
+        /*
+            Optimization:
+            - The containsLowercase() function is executed first.
+              If a password doesn't contain lowercase, we can return false and skip the other validations.
+
+            - Returns true whenever the value of numValid is three.
+              The if statements are added after the function#3 and #4 are executed.
+
+         */
     }
 
     public boolean isLargerThanEight(String password) throws IllegalArgumentException {
