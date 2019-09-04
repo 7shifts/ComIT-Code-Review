@@ -1,7 +1,7 @@
 # ComIT-Code-Review
 
 TDD Kata 3
-Create a Password verifications class called “PasswordVerifier”.
+Create a Password verifications class called “main.PasswordVerifier”.
 Add the following verifications to a master function called “Verify()”
 
 - password should be larger than 8 chars
