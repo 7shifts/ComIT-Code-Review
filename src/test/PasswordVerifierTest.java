@@ -15,6 +15,7 @@ class PasswordVerifierTest {
         assertEquals(true, tester.verify("7Shift"));        // not null, upper, lower, digit
         assertEquals(true, tester.verify("Shift"));         // not null, upper, lower
         assertEquals(false, tester.verify("SHIFT"));        // not null, upper
+        assertEquals(false, tester.verify("7SHIFTCOMIT"));  // not null, upper, digit, >8, ** no lowercase **
         assertEquals(false, tester.verify(null));
     }
 

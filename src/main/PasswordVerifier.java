@@ -10,6 +10,15 @@ public class PasswordVerifier {
 
     public boolean verify(String password) {
         int numValid = 0;
+
+        // password is never OK if item 1.4 (password should have one lowercase letter at least) is not true.
+        try {
+            if (containsLowercase(password)) numValid++;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+            return false;
+        }
+
         try {
             if (isLargerThanEight(password)) numValid++;
         } catch (IllegalArgumentException e) {
@@ -24,12 +33,6 @@ public class PasswordVerifier {
 
         try {
             if (containsUppercase(password)) numValid ++;
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
-        }
-
-        try {
-            if (containsLowercase(password)) numValid++;
         } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
